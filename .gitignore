@@ -1,0 +1,9 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/Blueprint
+/HaatBazaar.Web/bin
+/HaatBazaar.Web/obj
+/HaatBazaar.Web/appsettings.Development.json
+/HaatBazaar.Web/appsettings.json
