@@ -1,0 +1,150 @@
+body {
+  background-color: #f2f2f2;
+  font-family: sans-serif;
+}
+.container-large {
+  max-width: 100%;
+  padding: 0 15px;
+}
+.header {
+  margin-top: 40px;
+}
+.search-box {
+  width: 100%;
+  position: relative;
+  display: flex;
+}
+.search-input {
+  width: 100%;
+  padding: 10px;
+  border: 4px solid #2eb394;
+  border-radius: 10px 0 0 10px;
+  border-right: none;
+  outline: none;
+  font-size: 18px;
+  color: #000;
+  background: none;
+}
+.search-button {
+  text-align: center;
+  height: 51px;
+  width: 40px;
+  outline: none;
+  cursor: pointer;
+  border: 4px solid #2eb394;
+  border-radius: 0 10px 10px 0;
+  border-left: none;
+  background: none;
+  font-size: 20px;
+  border-left: 4px solid #2eb394;
+  color: #2eb394;
+}
+.search-wrap {
+  width: 35%;
+  margin: 20px auto 0;
+}
+.search-wrap h2 {
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 20px;
+  font-weight: 500;
+}
+.map-wrap {
+  max-width: 1024px;
+  margin: 40px auto;
+  border: 2px solid #2eb394;
+}
+#map {
+  height: 600px;
+  width: 100%;
+}
+
+.product_image--small {
+  float: left;
+}
+
+.product_image--small img {
+  width: 100%;
+}
+
+.leaflet-popup-content {
+  margin: 10px;
+}
+.leaflet-popup {
+  min-width: 200px;
+  font-size: 14px;
+  h2 {
+    margin: 0;
+  }
+}
+.logo {
+  max-width: 150px;
+  margin: 0 auto;
+}
+
+.logo a {
+  display: inline-block;
+}
+
+.logo a img {
+  width: 100%;
+}
+
+.nav {
+  display: flex;
+  justify-content: center;
+}
+.header-top ul {
+  display: flex;
+  list-style: none;
+  margin: 20px 0;
+  padding: 0;
+  align-items: center;
+  a {
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 400;
+    padding: 0 20px;
+    color: #2fb395;
+    &.btn {
+      padding: 5px 20px;
+    }
+  }
+}
+select#radiusSelect {
+  border: 2px solid #2eb394;
+  padding: 5px;
+  border-radius: 5px;
+  margin: 5px auto 0;
+  display: inline-block;
+  background: transparent;
+}
+
+.app-main {
+  padding-left: 30px;
+}
+.login-box,
+.register-box {
+  margin: 20px auto;
+}
+
+.logo-wrap {
+  max-width: 110px;
+  img {
+    max-width: 100%;
+  }
+}
+.header-top__wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.seller-page-product {
+  .user-details {
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+  }
+}

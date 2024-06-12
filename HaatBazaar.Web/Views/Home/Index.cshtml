@@ -1,0 +1,44 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+<header class="header">
+    <div class="logo">
+        <a href="/">
+            <img src="logo.svg" alt="Haat Bazar">
+        </a>
+    </div>
+</header>
+<div class="search-wrap">
+    <h2>Search for items near you</h2>
+    <form id="searchForm">
+        <div class="search-box">
+            <input id="searchInput" name="searchInput" type="text" class="search-input" placeholder="Search...">
+            <button type="submit" class="search-button">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+        <div class="search-radius">
+            Change search radius
+            <select id="radiusSelect">
+                <option value="0.5">500 m</option>
+                <option value="1">1 km</option>
+                <option value="2">2 km</option>
+                <option value="3">3 km</option>
+                <option value="4">4 km</option>
+                <option value="9999">4 km+</option>
+            </select>
+        </div>
+    </form>
+</div>
+<div class="container-large">
+    <div class="map-wrap">
+        <div id="map"></div>
+    </div>
+</div>
+<div id="searchResults"></div>

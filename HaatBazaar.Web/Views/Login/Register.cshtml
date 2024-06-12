@@ -1,0 +1,68 @@
+<div class="container">
+    <div class="row">
+        <div class="container-fluid  mb-5 mt-5">
+            <div class="register-box"> <!-- /.register-logo -->
+                <div class="card card-outline card-primary">
+                    <div class="card-body register-card-body">
+                        <h4 class="register-box-msg">Register a new membership</h4>
+                        <form action="../index3.html" method="post">
+                            <div class="input-group mb-1">
+                                <div class="form-floating">
+                                    <input id="registerFname" type="text" class="form-control" placeholder="">
+                                    <label for="registerFname">First Name</label>
+                                </div>
+                                <div class="input-group-text"> <span class="bi bi-person"></span> </div>
+                            </div>
+                            <div class="input-group mb-1">
+                                <div class="form-floating">
+                                    <input id="registerLname" type="text" class="form-control" placeholder="">
+                                    <label for="registerLname">LastName</label>
+                                </div>
+                                <div class="input-group-text"> <span class="bi bi-person"></span> </div>
+                            </div>
+                            <div class="input-group mb-1">
+                                <div class="form-floating"> <input id="loginPhone" type="tel"
+                                        pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" class="form-control" placeholder=""
+                                        required>
+                                    <label for="loginPhone">Phone Number</label>
+                                </div>
+                                <div class="input-group-text"> <span class="bi bi-phone"></span> </div>
+                            </div>
+                            <div class="input-group mb-1">
+                                <div class="form-floating"> <input id="registerEmail" type="email" class="form-control"
+                                        placeholder=""> <label for="registerEmail">Email</label> </div>
+                                <div class="input-group-text"> <span class="bi bi-envelope"></span> </div>
+                            </div>
+                            <div class="input-group mb-1">
+                                <div class="form-floating"> <input id="registerPassword" type="password"
+                                        class="form-control" placeholder=""> <label
+                                        for="registerPassword">Password</label>
+                                </div>
+                                <div class="input-group-text"> <span class="bi bi-lock-fill"></span> </div>
+                            </div> <!--begin::Row-->
+                            <div class="row">
+                                <div class="col-8 d-inline-flex align-items-center">
+                                    <div class="form-check"> <input class="form-check-input" type="checkbox" value=""
+                                            id="flexCheckDefault"> <label class="form-check-label"
+                                            for="flexCheckDefault">
+                                            I agree to the <a href="#">terms</a> </label> </div>
+                                </div> <!-- /.col -->
+                                <div class="col-4">
+                                    <div class="d-grid gap-2"> <button type="submit" class="btn btn-primary">Sign
+                                            In</button>
+                                    </div>
+                                </div> <!-- /.col -->
+                            </div> <!--end::Row-->
+                        </form>
+
+                        <p class="mb-0">
+                            <a asp-controller="login" asp-action="login" class="link-primary text-center">I already have
+                                a
+                                membership</a>
+                        </p>
+                    </div> <!-- /.register-card-body -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

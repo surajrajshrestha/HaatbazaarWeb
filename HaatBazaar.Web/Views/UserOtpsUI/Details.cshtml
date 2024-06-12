@@ -1,0 +1,35 @@
+﻿@model HaatBazaar.Web.Models.UserOtp
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>UserOtp</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PhoneNumber)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Otp)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Otp)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DateSent)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DateSent)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
