@@ -69,7 +69,7 @@ $(document).ready(function () {
 
         if (searchTerm.trim() !== "") {
             $.ajax({
-                url: "https://localhost:7048/api/Search?searchItem=" + searchTerm,
+                url: "https://blueprintapp.azurewebsites.net/api/Search?searchItem=" + searchTerm,
                 method: "GET",
                 contentType: "application/json",
                 success: function (data) {
