@@ -12,6 +12,6 @@
     <WebStackScaffolding_DbContextTypeFullName>HaatBazaar.Web.Models.HaatBazaarContext</WebStackScaffolding_DbContextTypeFullName>
     <WebStackScaffolding_IsAsyncSelected>False</WebStackScaffolding_IsAsyncSelected>
     <WebStackScaffolding_IsViewGenerationSelected>True</WebStackScaffolding_IsViewGenerationSelected>
-    <NameOfLastUsedPublishProfile>D:\Blueprint\HaatBazaar\HaatBazaar.Web\Properties\PublishProfiles\FolderProfile.pubxml</NameOfLastUsedPublishProfile>
+    <NameOfLastUsedPublishProfile>D:\Blueprint\HaatBazaarWeb\.github\workflows\haatbazaar.yml</NameOfLastUsedPublishProfile>
   </PropertyGroup>
 </Project>
