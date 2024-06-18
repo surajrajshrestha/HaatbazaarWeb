@@ -1,7 +1,3 @@
-using HaatBazaar.Web.Models;
-using Microsoft.AspNetCore.Authentication.Negotiate;
-using Microsoft.EntityFrameworkCore;
-
 namespace HaatBazaar.Web
 {
     public class Program
@@ -10,9 +6,6 @@ namespace HaatBazaar.Web
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            builder.Services.AddDbContext<HaatBazaarContext>(options =>
-                options.UseSqlServer(builder.Configuration.GetConnectionString("HaatBazaarConnection")));
-            // Add services to the container.
             builder.Services.AddControllersWithViews()
                 .AddRazorRuntimeCompilation();
 
