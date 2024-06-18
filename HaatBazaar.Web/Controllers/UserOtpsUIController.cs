@@ -1,8 +1,4 @@
-﻿using HaatBazaar.Web.Models;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-
-namespace HaatBazaar.Web.Controllers
+﻿namespace HaatBazaar.Web.Controllers
 {
     public class UserOtpsUiController(IConfiguration configuration) : BaseController(configuration, "userotps")
     {

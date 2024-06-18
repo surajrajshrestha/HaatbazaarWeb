@@ -1,152 +1,82 @@
-using HaatBazaar.Web.Models;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace HaatBazaar.Web.Controllers
 {
-    public class UsersUIController : Controller
+    public class UsersUiController : Controller
     {
-        private readonly HaatBazaarContext _context;
-
-        public UsersUIController(HaatBazaarContext context)
-        {
-            _context = context;
-        }
-
-        // GET: UsersUI
-        public async Task<IActionResult> Index()
-        {
-            await Task.CompletedTask;
-            return View();
-        }
-
-        // GET: UsersUI/Details/5
-        public async Task<IActionResult> Details(long? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var user = await _context.Users
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-            return View(user);
-        }
-
-        // GET: UsersUI/Create
-        public IActionResult Create()
+        // GET: UsersUIController
+        public ActionResult Index()
         {
             return View();
         }
 
-        // POST: UsersUI/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // GET: UsersUIController/Details/5
+        public ActionResult Details(int id)
+        {
+            return View();
+        }
+
+        // GET: UsersUIController/Create
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: UsersUIController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,PhoneNumber,Verified,RegisteredDate")] User user)
+        public ActionResult Create(IFormCollection collection)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(user);
-                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(user);
+            catch
+            {
+                return View();
+            }
         }
 
-        // GET: UsersUI/Edit/5
-        public async Task<IActionResult> Edit(long? id)
+        // GET: UsersUIController/Edit/5
+        public ActionResult Edit(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var user = await _context.Users.FindAsync(id);
-            if (user == null)
-            {
-                return NotFound();
-            }
-            return View(user);
+            return View();
         }
 
-        // POST: UsersUI/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: UsersUIController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("Id,PhoneNumber,Verified,RegisteredDate")] User user)
+        public ActionResult Edit(int id, IFormCollection collection)
         {
-            if (id != user.Id)
+            try
             {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(user);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!UserExists(user.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
                 return RedirectToAction(nameof(Index));
             }
-            return View(user);
+            catch
+            {
+                return View();
+            }
         }
 
-        // GET: UsersUI/Delete/5
-        public async Task<IActionResult> Delete(long? id)
+        // GET: UsersUIController/Delete/5
+        public ActionResult Delete(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var user = await _context.Users
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-            return View(user);
+            return View();
         }
 
-        // POST: UsersUI/Delete/5
-        [HttpPost, ActionName("Delete")]
+        // POST: UsersUIController/Delete/5
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(long id)
+        public ActionResult Delete(int id, IFormCollection collection)
         {
-            var user = await _context.Users.FindAsync(id);
-            if (user != null)
+            try
             {
-                _context.Users.Remove(user);
+                return RedirectToAction(nameof(Index));
             }
-
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool UserExists(long id)
-        {
-            return _context.Users.Any(e => e.Id == id);
+            catch
+            {
+                return View();
+            }
         }
     }
 }
