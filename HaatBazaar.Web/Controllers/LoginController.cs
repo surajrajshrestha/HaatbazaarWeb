@@ -8,7 +8,6 @@ namespace HaatBazaar.Web.Controllers
         [HttpGet]
         public IActionResult Register()
         {
-
             return View();
         }
         [HttpGet]
@@ -18,16 +17,28 @@ namespace HaatBazaar.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Register(Register register)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Register(Register register)
         {
-
-            return View();
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+            var response = await PostAsync(register, "register");
+            return RedirectToAction("Login");
         }
 
         [HttpPost]
-        public IActionResult Login(Login login)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login(Login login)
         {
-            return View();
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
+            await PostAsync(login, "login");
+            return RedirectToAction("Index", "Home");
         }
     }
 }

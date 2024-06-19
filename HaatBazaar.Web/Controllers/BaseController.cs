@@ -45,6 +45,13 @@ namespace HaatBazaar.Web.Controllers
             await client.PostAsJsonAsync(ApiUrl, model);
         }
 
+        public async Task<object> PostAsync<T>(T model, string endpoint)
+        {
+            var client = new HttpClient();
+            var response = await client.PostAsJsonAsync($"{ApiUrl}/{endpoint}", model);
+            return response;
+        }
+
         public async Task PutAsync<T>(int id, T model)
         {
             var client = new HttpClient();
