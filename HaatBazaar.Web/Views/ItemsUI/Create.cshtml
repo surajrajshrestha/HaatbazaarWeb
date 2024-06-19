@@ -3,31 +3,170 @@
 @{
     ViewData["Title"] = "Create";
 }
+<style>
+    .site-main {
+        margin-top: 60px;
+    }
+</style>
+<div class="site-main">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10">
+                <h2>Create New Product</h2>
+                <hr />
+                <form asp-action="Create">
+                    <div class="card-body">
+                        <div class="row g-3">
+                            <div aria-colspan="col-md-12" asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="col-lg-6">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h4>Select the Appropiate Values</h4>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group mb-4">
+                                            <label for="validationCustom04" class="form-label">Product Name</label>
+                                            <select class="form-select" id="validationCustom04" required="">
+                                                <option selected="" disabled="" value="">Choose...</option>
+                                                <option>Potato</option>
+                                                <option>Tomato</option>
+                                                <option>Apple</option>
+                                                <option>Orange</option>
+                                            </select>
+                                            <span asp-validation-for="Name" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group mb-4">
+                                            <label for="validationCustom04" class="form-label">Product Category</label>
+                                            <select class="form-select" id="validationCustom04" required="">
+                                                <option selected="" disabled="" value="">Choose...</option>
+                                                <option>Fruits</option>
+                                                <option>Vegitables</option>
+                                                <option>Meat</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group mb-4">
+                                            <label for="validationCustom04" class="form-label">Product Tags</label>
+                                            <select class="form-select" id="validationCustom04" required="">
+                                                <option selected="" disabled="" value="">Choose...</option>
+                                                <option>Tag 1</option>
+                                                <option>Tag 2</option>
+                                                <option>Tag3</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group mb-4">
+                                            <label for="validationCustom04" class="form-label">Product Tags</label>
+                                            <select class="form-select" id="validationCustom04" required="">
+                                                <option selected="" disabled="" value="">Choose...</option>
+                                                <option>Tag 1</option>
+                                                <option>Tag 2</option>
+                                                <option>Tag3</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group mb-4">
+                                            <label for="validationCustom04" class="form-label">Product Unit</label>
+                                            <select class="form-select" id="validationCustom04" required="">
+                                                <option selected="" disabled="" value="">Choose...</option>
+                                                <option>KG</option>
+                                                <option>GM</option>
+                                                <option>LTR</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group mb-4">
+                                            <label class="control-label" for="Price">Product Price</label>
+                                            <input class="form-control" type="text" data-val="true"
+                                                data-val-required="The Name field is required." id="Price" name="price"
+                                                value="">
+                                            <span class="text-danger field-validation-valid" data-valmsg-for="price"
+                                                data-valmsg-replace="true"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h4>Suggest the desired value you want to display.</h4>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group mb-4">
+                                            <label for="validationCustom04" class="form-label">Product Name</label>
+                                            <input class="form-control" type="text" data-val="true"
+                                                data-val-required="The Name field is required." id="Price" name="price"
+                                                value="">
+                                            <span class="text-danger field-validation-valid" data-valmsg-for="price"
+                                                data-valmsg-replace="true"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group mb-4">
+                                            <label for="validationCustom04" class="form-label">Product Category</label>
+                                            <input class="form-control" type="text" data-val="true"
+                                                data-val-required="The Name field is required." id="Price" name="price"
+                                                value="">
+                                            <span class="text-danger field-validation-valid" data-valmsg-for="price"
+                                                data-valmsg-replace="true"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group mb-4">
+                                            <label for="validationCustom04" class="form-label">Product Tags</label>
+                                            <input class="form-control" type="text" data-val="true"
+                                                data-val-required="The Name field is required." id="Price" name="price"
+                                                value="">
+                                            <span class="text-danger field-validation-valid" data-valmsg-for="price"
+                                                data-valmsg-replace="true"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group mb-4">
+                                            <label for="validationCustom04" class="form-label">Product Tags</label>
+                                            <input class="form-control" type="text" data-val="true"
+                                                data-val-required="The Name field is required." id="Price" name="price"
+                                                value="">
+                                            <span class="text-danger field-validation-valid" data-valmsg-for="price"
+                                                data-valmsg-replace="true"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group mb-4">
+                                            <label for="validationCustom04" class="form-label">Product Unit</label>
+                                            <input class="form-control" type="text" data-val="true"
+                                                data-val-required="The Name field is required." id="Price" name="price"
+                                                value="">
+                                            <span class="text-danger field-validation-valid" data-valmsg-for="price"
+                                                data-valmsg-replace="true"></span>
+                                        </div>
+                                    </div>
 
-<h1>Create</h1>
-
-<h4>Item</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                    </div>
+                </form>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+            <div class="col-lg-6">
+                <a asp-action="Index">Back to List</a>
             </div>
-        </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
