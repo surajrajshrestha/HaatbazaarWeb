@@ -8,7 +8,7 @@ $("#searchInput").blur(function () {
     $('body').removeClass("focused");
 });
 
-var map = L.map("map").setView([27.6928855, 85.3192919], 13);
+var map = L.map("map").setView([27.7765405,85.3463452], 13);
 
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     maxZoom: 19,
@@ -16,8 +16,8 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
 }).addTo(map);
 
 function updateLocation(dummyLocations, radius) {
-    var lat = 27.6928855;
-    var lon = 85.3192919;
+    var lat = 27.7765405;
+    var lon = 85.3463452;
 
     map.eachLayer(function (layer) {
         if (layer instanceof L.Marker || layer instanceof L.Circle) {
@@ -42,7 +42,12 @@ function updateLocation(dummyLocations, radius) {
         radius: radius * 1000
     }).addTo(map);
 
+    var totalQuantity = 0; 
+    var price= 0;
+    var avgPrice = 0;
+    var location = 0;
     $.each(dummyLocations, function (index, location) {
+        location++;
         var distance = map.distance([lat, lon], [location.latitude, location.longitude]);
         if (distance <= radius * 1000) {
             var dummyMarker = L.marker([location.latitude, location.longitude])
@@ -51,13 +56,23 @@ function updateLocation(dummyLocations, radius) {
                     "<div class='product_image--small'><img src='https://images.unsplash.com/photo-1573196444577-af471298e034'></div>" +
                     "Within " + radius + " km radius" +
                     "<br>Product: " + location.product +
-                    "<br>Quantity: " + location.quantity +
+                    "<br>Quantity: " + location.quantity + location.unit +
                     "<br>Price: " + location.price +
                     "<br><br><a href='/'>Connect</a>"
                 )
                 .openPopup();
+                var lq = location.quantity;
+                totalQuantity += lq;
+                console.log(dummyLocations.length);
+                //avg price
+                price += location.price;
+                console.log(price);
+                avgPrice = price/dummyLocations.length;
+                
         }
     });
+    console.log(totalQuantity);
+    $(".suggestion-box").html("Total Quantity: " + totalQuantity + "<br>Avg Price: " + dummyLocations.length);
 }
 
 $(document).ready(function () {
