@@ -1,3 +1,4 @@
+using System.Net;
 using HaatBazaar.Web.Helpers;
 using HaatBazaar.Web.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -40,14 +41,19 @@ namespace HaatBazaar.Web.Controllers
             }
 
             var response = await PostAsync($"{Endpoint}/login", login);
-            var token = await response.Content.ReadAsStringAsync();
 
-            Response.Cookies.Append(HaatBazaarConstants.CookieName, token, new CookieOptions()
+            if (response.StatusCode == HttpStatusCode.OK)
             {
-                HttpOnly = true,
-                Expires = DateTime.UtcNow.AddMinutes(30)
-            });
-            return RedirectToAction("Index", "Dashboard");
+                var token = await response.Content.ReadAsStringAsync();
+                Response.Cookies.Append(HaatBazaarConstants.CookieName, token, new CookieOptions()
+                {
+                    HttpOnly = true,
+                    Expires = DateTime.UtcNow.AddMinutes(30)
+                });
+                return RedirectToAction("Index", "Dashboard");
+            }
+
+            return View(login);
         }
     }
 }
