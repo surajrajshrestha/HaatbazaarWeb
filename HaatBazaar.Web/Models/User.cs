@@ -24,8 +24,4 @@ public partial class User
     public DateTime? RegisteredDate { get; set; }
 
     public string? Password { get; set; }
-
-    public virtual ICollection<RefreshToken> RefreshTokens { get; set; } = new List<RefreshToken>();
-
-    public virtual ICollection<UserItem> UserItems { get; set; } = new List<UserItem>();
 }

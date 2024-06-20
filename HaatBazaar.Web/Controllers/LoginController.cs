@@ -1,14 +1,16 @@
+using System.Net;
+using HaatBazaar.Web.Helpers;
 using HaatBazaar.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HaatBazaar.Web.Controllers
 {
-    public class LoginController(IConfiguration configuration) : BaseController(configuration, "auth")
+    public class LoginController(IConfiguration configuration) : BaseController(configuration)
     {
+        private const string Endpoint = "auth";
         [HttpGet]
         public IActionResult Register()
         {
-
             return View();
         }
         [HttpGet]
@@ -18,16 +20,40 @@ namespace HaatBazaar.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Register(Register register)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Register(Register register)
         {
-
-            return View();
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+            var response = await PostAsync($"{Endpoint}/register", register);
+            return RedirectToAction("Login");
         }
 
         [HttpPost]
-        public IActionResult Login(Login login)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login(Login login)
         {
-            return View();
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
+            var response = await PostAsync($"{Endpoint}/login", login);
+
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                var token = await response.Content.ReadAsStringAsync();
+                Response.Cookies.Append(HaatBazaarConstants.CookieName, token, new CookieOptions()
+                {
+                    HttpOnly = true,
+                    Expires = DateTime.UtcNow.AddMinutes(30)
+                });
+                return RedirectToAction("Index", "Dashboard");
+            }
+
+            return View(login);
         }
     }
 }

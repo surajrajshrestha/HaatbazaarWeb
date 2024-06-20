@@ -3,11 +3,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HaatBazaar.Web.Controllers
 {
-    public class ImagesUiController(IConfiguration configuration) : BaseController(configuration, "images")
+    public class ImagesUiController(IConfiguration configuration) : BaseController(configuration)
     {
+        private const string Endpoint = "images";
         public async Task<IActionResult> Index()
         {
-            var images = await GetAllAsync<Image>();
+            var images = await GetAllAsync<Image>($"{Endpoint}");
             return View(images);
         }
 
@@ -17,7 +18,7 @@ namespace HaatBazaar.Web.Controllers
             {
                 return NotFound();
             }
-            var image = await GetByIdAsync<Image>(id);
+            var image = await GetByIdAsync<Image>($"{Endpoint}", id);
             if (image == null)
             {
                 return NotFound();
@@ -37,7 +38,7 @@ namespace HaatBazaar.Web.Controllers
             if (!ModelState.IsValid) 
                 return View(image);
 
-            await PostAsync(image);
+            await PostAsync($"{Endpoint}", image);
             return RedirectToAction(nameof(Index));
         }
 
@@ -48,7 +49,7 @@ namespace HaatBazaar.Web.Controllers
                 return NotFound();
             }
 
-            var image = await GetByIdAsync<Image>(id);
+            var image = await GetByIdAsync<Image>($"{Endpoint}", id);
             if (image == null)
             {
                 return NotFound();
@@ -68,7 +69,7 @@ namespace HaatBazaar.Web.Controllers
             if (!ModelState.IsValid) 
                 return View(image);
 
-            await PutAsync(id, image);
+            await PutAsync($"{Endpoint}", id, image);
 
             return RedirectToAction(nameof(Index));
         }
@@ -80,7 +81,7 @@ namespace HaatBazaar.Web.Controllers
             {
                 return NotFound();
             }
-            var image = await GetByIdAsync<Image>(id);
+            var image = await GetByIdAsync<Image>($"{Endpoint}", id);
             if (image == null)
             {
                 return NotFound();
@@ -93,7 +94,7 @@ namespace HaatBazaar.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            await DeleteAsync<Category>(id);
+            await DeleteAsync<Category>($"{Endpoint}", id);
             return RedirectToAction(nameof(Index));
         }
     }
