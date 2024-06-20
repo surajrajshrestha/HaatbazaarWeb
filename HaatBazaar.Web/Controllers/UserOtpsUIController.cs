@@ -1,7 +1,8 @@
 ﻿namespace HaatBazaar.Web.Controllers
 {
-    public class UserOtpsUiController(IConfiguration configuration) : BaseController(configuration, "userotps")
+    public class UserOtpsUiController(IConfiguration configuration) : BaseController(configuration)
     {
+        private const string endpoint = "userotps";
         //public async Task<IActionResult> Index()
         //{
         //    var userOtps = await GetAllAsync<UserOtp>();
@@ -72,7 +73,7 @@
         //        return View(userOtp);
         //    }
         //    await PutAsync(id, userOtp);
-            
+
         //    return RedirectToAction(nameof(Index));
         //}
 

@@ -9,6 +9,9 @@
 
   <ItemGroup>
     <Content Remove="Views\Shared\_PublicLayout.cshtml" />
+    <Content Remove="Views\UserItemsUI\Delete.cshtml" />
+    <Content Remove="Views\UserItemsUI\Details.cshtml" />
+    <Content Remove="Views\UserItemsUI\Edit.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -34,10 +37,6 @@
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="Views\Shared\_PublicLayout.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Models\" />
   </ItemGroup>
 
 </Project>

@@ -3,11 +3,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HaatBazaar.Web.Controllers
 {
-    public class ItemsUiController(IConfiguration configuration) : BaseController(configuration, "items")
+    public class ItemsUiController(IConfiguration configuration) : BaseController(configuration)
     {
+        private const string Endpoint = "items";
         public async Task<IActionResult> Index()
         {
-            var items = await GetAllAsync<Item>();
+            var items = await GetAllAsync<Item>($"{Endpoint}");
             return View(items);
         }
 
@@ -17,7 +18,7 @@ namespace HaatBazaar.Web.Controllers
             {
                 return NotFound();
             }
-            var item = await GetByIdAsync<Item>(id);
+            var item = await GetByIdAsync<Item>($"{Endpoint}", id);
             if (item == null)
             {
                 return NotFound();
@@ -37,7 +38,7 @@ namespace HaatBazaar.Web.Controllers
         {
             if (!ModelState.IsValid) 
                 return View(item);
-            await PostAsync(item);
+            await PostAsync($"{Endpoint}", item);
             return RedirectToAction(nameof(Index));
         }
 
@@ -47,7 +48,7 @@ namespace HaatBazaar.Web.Controllers
             {
                 return NotFound();
             }
-            var item = await GetByIdAsync<Item>(id);
+            var item = await GetByIdAsync<Item>($"{Endpoint}", id);
             if (item == null)
             {
                 return NotFound();
@@ -65,7 +66,7 @@ namespace HaatBazaar.Web.Controllers
             }
             if (!ModelState.IsValid) 
                 return View(item);
-            await PutAsync(id, item);
+            await PutAsync($"{Endpoint}", id, item);
 
             return RedirectToAction(nameof(Index));
         }
@@ -76,7 +77,7 @@ namespace HaatBazaar.Web.Controllers
             {
                 return NotFound();
             }
-            var item = await GetByIdAsync<Item>(id);
+            var item = await GetByIdAsync<Item>($"{Endpoint}", id);
             if (item == null)
             {
                 return NotFound();
@@ -90,7 +91,7 @@ namespace HaatBazaar.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            await DeleteAsync<Item>(id);
+            await DeleteAsync<Item>($"{Endpoint}", id);
             return RedirectToAction(nameof(Index));
         }
     }

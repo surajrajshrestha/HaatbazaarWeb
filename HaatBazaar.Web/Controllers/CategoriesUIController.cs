@@ -3,11 +3,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HaatBazaar.Web.Controllers
 {
-    public class CategoriesUiController(IConfiguration configuration) : BaseController(configuration, "categories")
+    public class CategoriesUiController(IConfiguration configuration) : BaseController(configuration)
     {
+        private const string Endpoint = "categories";
         public async Task<IActionResult> Index()
         {
-            var categories = await GetAllAsync<Category>();
+            var categories = await GetAllAsync<Category>($"{Endpoint}");
             return View(categories);
         }
 
@@ -18,7 +19,7 @@ namespace HaatBazaar.Web.Controllers
                 return NotFound();
             }
 
-            var category = await GetByIdAsync<Category>(id);
+            var category = await GetByIdAsync<Category>($"{Endpoint}", id);
 
             if (category == null)
             {
@@ -40,7 +41,7 @@ namespace HaatBazaar.Web.Controllers
             if (!ModelState.IsValid) 
                 return View(category);
 
-            await PostAsync(category);
+            await PostAsync($"{Endpoint}", category);
             return RedirectToAction(nameof(Index));
         }
 
@@ -50,7 +51,7 @@ namespace HaatBazaar.Web.Controllers
             {
                 return NotFound();
             }
-            var category = await GetByIdAsync<Category>(id);
+            var category = await GetByIdAsync<Category>($"{Endpoint}", id);
             if (category == null)
             {
                 return NotFound();
@@ -70,7 +71,7 @@ namespace HaatBazaar.Web.Controllers
             if (!ModelState.IsValid) 
                 return View(category);
 
-            await PutAsync(id, category);
+            await PutAsync($"{Endpoint}", id, category);
             return RedirectToAction(nameof(Index));
         }
 
@@ -81,7 +82,7 @@ namespace HaatBazaar.Web.Controllers
                 return NotFound();
             }
 
-            var category = await GetByIdAsync<Category>(id);
+            var category = await GetByIdAsync<Category>($"{Endpoint}", id);
 
             if (category == null)
             {
@@ -95,7 +96,7 @@ namespace HaatBazaar.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            await DeleteAsync<Category>(id);
+            await DeleteAsync<Category>($"{Endpoint}", id);
 
             return RedirectToAction(nameof(Index));
         }
