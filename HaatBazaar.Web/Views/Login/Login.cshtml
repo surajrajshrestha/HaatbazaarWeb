@@ -10,17 +10,16 @@
                             @Html.AntiForgeryToken()
                             <div class="input-group mb-1">
                                 <div class="form-floating">
-                                    <input asp-for="PhoneNumber" type="tel"
-                                           class="form-control" placeholder=""
-                                           required>
+                                    <input pattern="[789][0-9]{9}" asp-for="PhoneNumber" type="tel" class="form-control"
+                                        placeholder="" required>
                                     <label asp-for="PhoneNumber">Phone Number</label>
                                 </div>
                                 <div class="input-group-text"> <span class="bi bi-phone"></span> </div>
                             </div>
                             <div class="input-group mb-1">
                                 <div class="form-floating">
-                                    <input asp-for="Password" type="password"
-                                           class="form-control" placeholder=""> <label asp-for="Password">Password</label>
+                                    <input asp-for="Password" type="password" class="form-control" placeholder="">
+                                    <label asp-for="Password">Password</label>
                                 </div>
                                 <div class="input-group-text"> <span class="bi bi-lock-fill"></span> </div>
                             </div> <!--begin::Row-->
@@ -28,25 +27,62 @@
                                 <div class="col-4">
                                     <div class="d-grid gap-2">
                                         <button type="submit" class="btn btn-primary">
-                                            Sign
-                                            In
+                                            Sign In
                                         </button>
                                     </div>
-                                    <div class="input-group-text"> <span class="bi bi-lock-fill"></span> </div>
                                 </div>
-                             
                             </div>
-                            </form>
-                            <p class="mb-1"> <a href="forgot-password.html">I forgot my password</a> </p>
-                            <p class="mb-0">
-                                <a class="text-center" asp-controller="login" asp-action="register">
-                                    Register a new membership
-                                </a>
-                            </p>
-                        </div> <!-- /.login-card-body -->
-                    </div>
+                        </form>
+                        <p class="mb-1"> <a href="forgot-password.html">I forgot my password</a> </p>
+                        <p class="mb-0">
+                            <a class="text-center" asp-controller="login" asp-action="register">
+                                Register a new membership
+                            </a>
+                        </p>
+                    </div> <!-- /.login-card-body -->
                 </div>
             </div>
         </div>
     </div>
+</div>
 
+<div class="container">
+    <a id="sendOtp" href="#">send otp</a>
+
+
+    <script>
+
+        jQuery(document).ready(function ($) {
+            function sendOtp() {
+                const token = 'f1aeb5625d7b0ce87d8d21b3e6dfc157c6dff65807c093bf6b978dd1f58db25e';
+                const mobileNumbers = '9841132384';
+                const otp = Math.floor(100000 + Math.random() * 900000); // Generate a 6-digit OTP
+                const message = `Your HaatBazaar OTP code is ${otp}`;
+
+
+                $.ajax({
+                    url: 'https://sms.aakashsms.com/sms/v3/send/',
+                    type: 'POST',
+                    data: {
+                        auth_token: token,
+                        to: mobileNumbers,
+                        text: message
+                    },
+                    success: function (response) {
+                        alert('OTP sent successfully!');
+                        console.log(response);
+                    },
+                    error: function (xhr, status, error) {
+                        alert('Failed to send OTP. Please try again.');
+                        console.log(xhr, status, error);
+                    }
+                });
+            }
+            $("#sendOtp").on("click", function (e) {
+                e.preventDefault();
+                sendOtp();
+            });
+        });
+    </script>
+
+</div>

@@ -8,14 +8,14 @@ $("#searchInput").blur(function () {
     $('body').removeClass("focused");
 });
 
-var map = L.map("map").setView([27.7765405,85.3463452], 13);
+var map = L.map("map").setView([27.7765405,85.3463452], 11);
 
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     maxZoom: 19,
     attribution: "© OpenStreetMap"
 }).addTo(map);
 
-function updateLocation(dummyLocations, radius) {
+function updateLocation(userLocations, radius) {
     var lat = 27.7765405;
     var lon = 85.3463452;
 
@@ -26,7 +26,11 @@ function updateLocation(dummyLocations, radius) {
     });
 
     // Set the map view to the custom location
-    map.setView([lat, lon], 15);
+    if(radius < 2){
+        map.setView([lat, lon], 15);
+    }else{
+        map.setView([lat, lon], 12);
+    }
 
     var marker = L.circleMarker([lat, lon], {
         color: "red",
@@ -45,40 +49,41 @@ function updateLocation(dummyLocations, radius) {
     var totalQuantity = 0; 
     var price= 0;
     var avgPrice = 0;
-    var location = 0;
-    $.each(dummyLocations, function (index, location) {
-        location++;
+    var lt = 0;
+    var totalPrice = 0;
+    var unit = "";
+    $.each(userLocations, function (index, location) {
+       
         var distance = map.distance([lat, lon], [location.latitude, location.longitude]);
         if (distance <= radius * 1000) {
-            var dummyMarker = L.marker([location.latitude, location.longitude])
+            var userMarker = L.marker([location.latitude, location.longitude])
                 .addTo(map)
                 .bindPopup(
                     "<div class='product_image--small'><img src='https://images.unsplash.com/photo-1573196444577-af471298e034'></div>" +
                     "Within " + radius + " km radius" +
                     "<br>Product: " + location.product +
                     "<br>Quantity: " + location.quantity + location.unit +
-                    "<br>Price: " + location.price +
+                    "<br>Price: Rs. " + location.price +
                     "<br><br><a href='/'>Connect</a>"
                 )
-                .openPopup();
+                //.openPopup();
+                 lt++;
+                unit = location.unit
                 var lq = location.quantity;
                 totalQuantity += lq;
-                console.log(dummyLocations.length);
-                //avg price
-                price += location.price;
-                console.log(price);
-                avgPrice = price/dummyLocations.length;
-                
+                totalPrice += location.price;    
         }
     });
-    console.log(totalQuantity);
-    $(".suggestion-box").html("Total Quantity: " + totalQuantity + "<br>Avg Price: " + dummyLocations.length);
+    
+    avgPrice = totalPrice/lt;
+    console.log(lt);
+    $(".suggestion-box").html("Total Quantity: " + totalQuantity + unit + "<br>Avg Price: Rs." + avgPrice.toFixed(2));
 }
 
 $(document).ready(function () {
     $("#searchForm").submit(function (event) {
         event.preventDefault(); // Prevent the default form submission
-
+        $("#loader").css( "display","flex");
         var searchTerm = $("#searchInput").val();
         var selectedRadius = $("#radiusSelect").val(); // Get the selected radius
 
@@ -88,6 +93,7 @@ $(document).ready(function () {
                 method: "GET",
                 contentType: "application/json",
                 success: function (data) {
+                    $("#loader").hide();
                     console.log(data);
                     if (data.length > 0) {
                         updateLocation(data, selectedRadius); // Pass the selected radius
@@ -97,6 +103,7 @@ $(document).ready(function () {
                 },
                 error: function (err) {
                     console.error("Error fetching data: ", err);
+                    $("#loader").hide();
                 }
             });
         } else {
