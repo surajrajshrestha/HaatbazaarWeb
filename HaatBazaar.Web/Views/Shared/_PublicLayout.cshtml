@@ -1,3 +1,5 @@
+@using HaatBazaar.Web
+@inject AuthService AuthService
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -60,12 +62,24 @@
                         <li><a asp-controller="useritemsui" asp-action="index">Products</a></li>
                         <li><a href="/">Buy</a></li>
                         <li><a asp-controller="usersui" asp-action="index">User</a></li>
-                        <li>
-                            <a id="auth-button" asp-controller="login" asp-action="login"
-                                class="btn btn-outline-success">
-                                Login
-                            </a>
-                        </li>
+                        @if(AuthService.IsAuthenticated())
+                        {
+                            <li>
+                                @using (Html.BeginForm("Logout", "Login", FormMethod.Post))
+                                {
+                                    <button type="submit" class="btn btn-link" id="logoutButton">Logout</button>
+                                }
+                            </li>
+                        }
+                        else
+                        {
+                            <li>
+                                <a id="auth-button" asp-controller="login" asp-action="login"
+                                   class="btn btn-outline-success">
+                                    Login
+                                </a>
+                            </li>
+                        }
                     </ul>
                 </nav>
             </div>

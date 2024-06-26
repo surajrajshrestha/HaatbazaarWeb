@@ -2,13 +2,14 @@ using HaatBazaar.Web.Helpers;
 using HaatBazaar.Web.Models;
 using HaatBazaar.Web.Models.ResponseModels;
 using HaatBazaar.Web.Models.Users;
+using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Net;
 
 namespace HaatBazaar.Web.Controllers
 {
-    public class LoginController(IConfiguration configuration) : BaseController(configuration)
+    public class LoginController(IConfiguration configuration, AuthService authService) : BaseController(configuration)
     {
         private const string Endpoint = "auth";
         [HttpGet]
@@ -71,9 +72,11 @@ namespace HaatBazaar.Web.Controllers
             if (response.StatusCode == HttpStatusCode.OK)
             {
                 var token = await response.Content.ReadAsStringAsync();
+
                 Response.Cookies.Append(HaatBazaarConstants.CookieName, token, new CookieOptions()
                 {
                     HttpOnly = true,
+                    Path = "/",
                     Expires = DateTime.UtcNow.AddMinutes(30)
                 });
                 return RedirectToAction("Index", "UserItemsUi");
@@ -106,7 +109,7 @@ namespace HaatBazaar.Web.Controllers
         [HttpPost("Logout")]
         public IActionResult Logout()
         {
-            Response.Cookies.Delete(HaatBazaarConstants.CookieName);
+            authService.Logout();
             return RedirectToAction("Login");
         }
     }

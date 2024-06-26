@@ -6,9 +6,10 @@ namespace HaatBazaar.Web
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Services.AddHttpContextAccessor();
+            builder.Services.AddScoped<AuthService>();
             builder.Services.AddControllersWithViews()
                 .AddRazorRuntimeCompilation();
-
 
             builder.Services.AddRazorPages();
 
@@ -24,7 +25,6 @@ namespace HaatBazaar.Web
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
             app.UseRouting();
 
             app.MapControllerRoute(

@@ -9,6 +9,10 @@ namespace HaatBazaar.Web.Controllers
         public async Task<IActionResult> Index(int connectionId)
         {
             var connection = await GetByIdAsync<ConnectionResponseModel>($"{Endpoint}", connectionId);
+            if(connection == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
             return View(connection);
         }
 
