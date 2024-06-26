@@ -141,8 +141,7 @@ $(document).ready(function () {
 
     if (searchTerm.trim() !== "") {
       $.ajax({
-        url:
-          "https://localhost:7048/api/Search?searchItem=" + searchTerm,
+        url: "http://localhost:9003/api/Search?searchItem=" + searchTerm,
         method: "GET",
         contentType: "application/json",
         success: function (data) {
