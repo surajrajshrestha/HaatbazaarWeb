@@ -1,4 +1,15 @@
 {
+  "name": "haatbazaarweb",
+  "description": "",
+  "version": "1.0.0",
+  "main": "cypress.config.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "npx cypress run"
+  },
+  "keywords": [],
+  "author": "Liraj Maharjan",
+  "license": "ISC",
   "dependencies": {
     "cypress": "^13.12.0"
   }
