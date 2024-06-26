@@ -16,8 +16,9 @@ namespace HaatBazaar.Web.Controllers
         public async Task<IActionResult> RequestToBuy(int connectionId)
         {
             var contractModel = new ContractRequestModel { ConnectionId = connectionId };
-            var connection = await PostAsync("contracts", contractModel);
-            return RedirectToAction("Index", connection);
+            var response = await PostAsync("contracts", contractModel);
+
+            return RedirectToAction("Index", new { connectionId });
         }
 
         [HttpPost]
@@ -25,7 +26,7 @@ namespace HaatBazaar.Web.Controllers
         {
             var contractModel = new ContractRequestModel { ConnectionId = connectionId };
             await PutAsync("contracts", contractModel);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { connectionId});
         }
     }
 }
