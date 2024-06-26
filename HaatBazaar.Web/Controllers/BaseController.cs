@@ -25,6 +25,7 @@ namespace HaatBazaar.Web.Controllers
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _token);
 
             var response = await client.GetAsync($"{ApiUrl}/{url}");
+
             var responseString = await response.Content.ReadAsStringAsync();
             var responseObject = JsonConvert.DeserializeObject<List<T>>(responseString);
             return responseObject ?? [];
