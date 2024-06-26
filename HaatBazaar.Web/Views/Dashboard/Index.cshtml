@@ -14,23 +14,34 @@ div class="container pt-5">
                     <th>Quantity</th>
                     <th>Unit</th>
                     <th>Rate</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model)
+                @if(Model != null)
+                {
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Item</td>
+                            <td>@item.Quantity</td>
+                            <td>@item.Unit</td>
+                            <td>@item.Price</td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                            </td>
+                        </tr>
+                    }
+                }
+                else
                 {
                     <tr>
-                        <td>@item.Item</td>
-                        <td>@item.Quantity</td>
-                        <td>@item.Unit</td>
-                        <td>@item.Price</td>
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-                        </td>
+                        <td colspan="5">No items found.</td>
                     </tr>
                 }
+
             </tbody>
         </table>
     </div>

@@ -1,10 +1,10 @@
-using System.Net;
 using HaatBazaar.Web.Helpers;
 using HaatBazaar.Web.Models;
 using HaatBazaar.Web.Models.ResponseModels;
 using HaatBazaar.Web.Models.Users;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Net;
 
 namespace HaatBazaar.Web.Controllers
 {
@@ -103,5 +103,11 @@ namespace HaatBazaar.Web.Controllers
             return View(model);
         }
 
+        [HttpPost("Logout")]
+        public IActionResult Logout()
+        {
+            Response.Cookies.Delete(HaatBazaarConstants.CookieName);
+            return RedirectToAction("Login");
+        }
     }
 }
