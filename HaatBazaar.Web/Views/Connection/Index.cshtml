@@ -2,7 +2,7 @@
 
 <div class="row">
     <div class="col-4">
-        <span>Seller Detail</span>
+        <span data-id="seller-section">Seller Details</span>
         <div class="row">
             <span>Item: @Model.Item.ItemName</span>
             <span>Quantity: @Model.Item.Quantity @Model.Item.Unit</span>
@@ -12,14 +12,14 @@
 
         <div class="row">
             <div class="col-12">
-                <span>Name: @Model.Seller?.Name</span>
+                <span data-id="sellerName-@Model.Seller?.Name">Name: @Model.Seller?.Name</span>
                 <span>Phone Number: @Model.Seller?.PhoneNumber</span>
                 <span>Address: @(Model.Seller?.Address ?? "-")</span>
             </div>
             <div class="col-12">
-                @foreach (var item in Model.Seller.Items)
+                @foreach (var (item, index) in Model.Seller?.Items.Select((item, index) => (item, index)))
                 {
-                    <span>Name: @item.ItemName</span>
+                    <span data-id="product-Name-@index">Name: @item.ItemName</span>
                     <span>Quantity: @item.Quantity @item.Unit</span>
                     <span>Rate: @item.Rate / @item.Unit</span>
                     <span>Total: @item.Total </span>
@@ -66,10 +66,17 @@
                 }
             </div>
         </div>
-        <div class="row">
-            <div class="col-12">
-                <button>Buy</button>
-            </div>
-        </div>
+        @if (Model.Buyer.BuyerId == Model.LoggedInUser)
+        {
+            <form method="post" asp-action="RequestToBuy">
+                <input type="hidden" name="connectionId" value="@Model.ConnectionId" />
+                <div class="row">
+                    <div class="col-12">
+                        <button data-id="buy-now" type="submit">Buy</button>
+                    </div>
+                </div>
+            </form>
+        }
     }
+</div>
 </div>

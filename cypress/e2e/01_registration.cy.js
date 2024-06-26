@@ -6,7 +6,7 @@ describe("Registration Page", () => {
     const email = `cypress-tester-${timestamp}@test.com`;
 
     // Visit the registration page and assert the page content is loaded successfully.
-    cy.visit("http://localhost:5077/login/register");
+    cy.visit("/login/register");
     cy.contains("h4", "Register a new membership")
       .should("exist")
       .and("be.visible");
@@ -32,7 +32,7 @@ describe("Registration Page", () => {
 
   it("should check for the validation message if any", () => {
     // Visit the registration page and assert the page content is loaded successfully.
-    cy.visit("http://localhost:5077/login/register");
+    cy.visit("/login/register");
     cy.contains("h4", "Register a new membership")
       .should("exist")
       .and("be.visible");

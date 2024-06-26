@@ -2,7 +2,7 @@
 describe("Login Page", () => {
   it("should successfully allow user to login in the system", () => {
     // Visit the login page and assert the page content is loaded successfully.
-    cy.visit("http://localhost:5077/login/login");
+    cy.visit("/login/login");
     cy.contains("h3", "Login").should("exist").and("be.visible");
 
     // Fill out the Login form and submit
@@ -16,7 +16,7 @@ describe("Login Page", () => {
 
   it("should throw an validation error for empty phone number", () => {
     // Visit the login page and assert the page content is loaded successfully.
-    cy.visit("http://localhost:5077/login/login");
+    cy.visit("/login/login");
     cy.contains("h3", "Login").should("exist").and("be.visible");
 
     // Leave the Phone number field empty and submit
