@@ -6,24 +6,25 @@
                 <div class="card card-outline card-primary">
                     <div class="card-body login-card-body">
                         <h3 class="register-box-msg fw-bold">Login</h3>
-                        <form action="" method="post">
+                        <form id="login-form" action="" method="post">
                             @Html.AntiForgeryToken()
-                            <div class="input-group mb-1">
+                            <div class="input-group mb-4">
                                 <div class="form-floating">
-                                    <input pattern="[789][0-9]{9}" asp-for="PhoneNumber" type="tel" class="form-control"
+                                    <input name="phone" asp-for="PhoneNumber" type="tel" class="form-control"
                                         placeholder="" required>
                                     <label asp-for="PhoneNumber">Phone Number</label>
                                 </div>
                                 <div class="input-group-text"> <span class="bi bi-phone"></span> </div>
                             </div>
-                            <div class="input-group mb-1">
+                            <div class="input-group mb-4">
                                 <div class="form-floating">
-                                    <input asp-for="Password" type="password" class="form-control" placeholder="">
+                                    <input name="password" asp-for="Password" type="password" class="form-control"
+                                        placeholder="" required>
                                     <label asp-for="Password">Password</label>
                                 </div>
                                 <div class="input-group-text"> <span class="bi bi-lock-fill"></span> </div>
                             </div> <!--begin::Row-->
-                            <div class="row">
+                            <div class="row mb-2">
                                 <div class="col-4">
                                     <div class="d-grid gap-2">
                                         <button type="submit" class="btn btn-primary">
@@ -45,10 +46,8 @@
         </div>
     </div>
 </div>
-
 <div class="container">
     <a id="sendOtp" href="#">send otp</a>
-
 
     <script>
 
