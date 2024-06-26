@@ -1,0 +1,44 @@
+﻿@model HaatBazaar.Web.Models.Connections.ConnectionResponseModel
+
+<div class="row">
+    <div class="col-4">
+        <span>Seller Detail</span>
+        <div class="row">
+            <div class="col-12">
+                <span>Name: @Model.Seller?.Name</span>
+                <span>Phone Number: @Model.Seller?.PhoneNumber</span>
+                <span>Address: @(Model.Seller?.Address ?? "-")</span>
+            </div>
+            <div class="col-12">
+                @foreach(var item in Model.Seller?.Items)
+                {
+                    <span>Name: @item.ItemName</span>
+                    <span>Quantity: @item.Quantity @item.Unit</span>
+                    <span>Rate: @item.Rate / @item.Unit</span>
+                    <span>Total: @item.Total </span>
+                }
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <button>Approve</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-4"></div>
+    <div class="col-4">
+        <span>Buyer Detail</span>
+        <div class="row">
+            <div class="col-12">
+                <span>Name: @Model.Buyer.Name</span>
+                <span>Phone Number: @Model.Buyer.PhoneNumber</span>
+                <span>Address: @(Model.Buyer.Address ?? "-")</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <button>Buy</button>
+            </div>
+        </div>
+    </div>
+</div>

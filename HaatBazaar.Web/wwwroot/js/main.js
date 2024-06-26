@@ -101,7 +101,7 @@ function updateLocation(userLocations, radius) {
               location.unit +
               "<br>Price: Rs: " +
               location.price +
-              "<br><br><a href='/'>Connect</a>"
+              "<br><br><a href='/connection/index?connectionId=" + location.connectId + "'>Connect</a>"
           );
         //.openPopup();
         lt++;
@@ -142,8 +142,7 @@ $(document).ready(function () {
     if (searchTerm.trim() !== "") {
       $.ajax({
         url:
-          "https://e0de-2400-1a00-b020-b10-4d4a-4bc5-ed4e-366a.ngrok-free.app/api/Search?searchItem=" +
-          searchTerm,
+          "https://localhost:7048/api/Search?searchItem=" + searchTerm,
         method: "GET",
         contentType: "application/json",
         success: function (data) {

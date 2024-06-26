@@ -34,11 +34,15 @@ namespace HaatBazaar.Web.Controllers
             var responseString = await response.Content.ReadAsStringAsync();
             var responseModel = JsonConvert.DeserializeObject<UserCreatedResponseModel>(responseString)!;
             
-            if(responseModel.NewUserCreated && !string.IsNullOrWhiteSpace(responseModel.Otp))
+            if(response.StatusCode == HttpStatusCode.Accepted)
             {
-                var otpModel = new VerifyOtpModel { PhoneNumber = register.PhoneNumber };
-                return View("VerifyOtp", otpModel);
+                if (responseModel.NewUserCreated && !string.IsNullOrWhiteSpace(responseModel.Otp))
+                {
+                    var otpModel = new VerifyOtpModel { PhoneNumber = register.PhoneNumber };
+                    return View("VerifyOtp", otpModel);
+                }
             }
+            
             return RedirectToAction("Login");
         }
 
@@ -53,6 +57,17 @@ namespace HaatBazaar.Web.Controllers
 
             var response = await PostAsync($"{Endpoint}/login", login);
 
+            if(response.StatusCode == HttpStatusCode.Accepted)
+            {
+                var responseString = await response.Content.ReadAsStringAsync();
+                var responseModel = JsonConvert.DeserializeObject<UserCreatedResponseModel>(responseString)!;
+
+                if (responseModel.NewUserCreated && !string.IsNullOrWhiteSpace(responseModel.Otp))
+                {
+                    var otpModel = new VerifyOtpModel { PhoneNumber = login.PhoneNumber };
+                    return View("VerifyOtp", otpModel);
+                }
+            }
             if (response.StatusCode == HttpStatusCode.OK)
             {
                 var token = await response.Content.ReadAsStringAsync();

@@ -1,4 +1,6 @@
-﻿namespace HaatBazaar.Web.Models.UserItems
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace HaatBazaar.Web.Models.UserItems
 {
     public class UserItemCreateModel
     {

@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace HaatBazaar.Web.Models;
 
 public class Register
