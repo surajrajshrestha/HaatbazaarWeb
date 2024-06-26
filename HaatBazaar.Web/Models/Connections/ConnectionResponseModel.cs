@@ -2,6 +2,7 @@
 {
     public class ConnectionResponseModel
     {
+        public bool IsSeller { get; set; }
         public int ConnectionId { get; set; }
         public int LoggedInUser { get; set; }
         public string ContractStatus { get; set; } = "";
