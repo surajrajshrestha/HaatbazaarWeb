@@ -8,14 +8,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="Views\Shared\_PublicLayout.cshtml" />
     <Content Remove="Views\UserItemsUI\Delete.cshtml" />
     <Content Remove="Views\UserItemsUI\Details.cshtml" />
     <Content Remove="Views\UserItemsUI\Edit.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="Views\Shared\_PublicLayout.cshtml" />
   </ItemGroup>
 
   <ItemGroup>

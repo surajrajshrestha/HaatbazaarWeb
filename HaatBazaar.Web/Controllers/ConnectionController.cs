@@ -11,5 +11,21 @@ namespace HaatBazaar.Web.Controllers
             var connection = await GetByIdAsync<ConnectionResponseModel>($"{Endpoint}", connectionId);
             return View(connection);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> RequestToBuy(int connectionId)
+        {
+            var contractModel = new ContractRequestModel { ConnectionId = connectionId };
+            var connection = await PostAsync("contracts", contractModel);
+            return RedirectToAction("Index", connection);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Approve(int connectionId)
+        {
+            var contractModel = new ContractRequestModel { ConnectionId = connectionId };
+            await PutAsync("contracts", contractModel);
+            return RedirectToAction("Index");
+        }
     }
 }

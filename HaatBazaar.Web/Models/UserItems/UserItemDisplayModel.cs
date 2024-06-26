@@ -2,6 +2,7 @@
 
 public sealed class UserItemDisplayModel
 {
+    public int Id { get; set; } = 6;
     public string? Item { get; set; }
 
     public float Quantity { get; set; }

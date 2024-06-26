@@ -77,6 +77,16 @@ namespace HaatBazaar.Web.Controllers
         //    return response;
         //}
 
+        public async Task PutAsync<T>(string url, T model)
+        {
+            _token = HttpContext?.Request?.GetCookie(HaatBazaarConstants.CookieName) ?? "";
+
+            var client = new HttpClient();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _token);
+
+            await client.PutAsJsonAsync($"{ApiUrl}/{url}", model);
+        }
+
         public async Task PutAsync<T>(string url, int id, T model)
         {
             _token = HttpContext?.Request?.GetCookie(HaatBazaarConstants.CookieName) ?? "";
