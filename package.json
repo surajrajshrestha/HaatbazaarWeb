@@ -3,7 +3,6 @@
   "description": "",
   "version": "1.0.0",
   "main": "cypress.config.js",
-  "devDependencies": {},
   "scripts": {
     "test": "npx cypress run"
   },
@@ -11,6 +10,7 @@
   "author": "Liraj Maharjan",
   "license": "ISC",
   "dependencies": {
-    "cypress": "^13.12.0"
+    "cypress": "^13.12.0",
+    "ws": "^8.17.1"
   }
 }

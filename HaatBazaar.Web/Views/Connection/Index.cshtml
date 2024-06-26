@@ -40,6 +40,11 @@
             }
         </div>
     </div>
+    <div class="col-4">
+        <div id="chat"></div>
+        <input type="text" id="messageInput" placeholder="Type a message..." />
+        <script src="client.js"></script>
+    </div>
     @if (Model.Buyer.BuyerId != Model.Seller.SellerId)
     {
         <div class="col-4"></div>
