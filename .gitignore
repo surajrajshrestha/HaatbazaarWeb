@@ -9,3 +9,5 @@
 /HaatBazaar.Web/appsettings.json
 /.vs/ProjectEvaluation
 /HaatBazaar.Web/wwwroot/js/main.js
+./appsettings.json
+/node_modules
