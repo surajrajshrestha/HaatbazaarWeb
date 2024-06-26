@@ -142,7 +142,7 @@ $(document).ready(function () {
     if (searchTerm.trim() !== "") {
       $.ajax({
         url:
-          "https://localhost:7048/api/Search?searchItem=" +
+          "https://e0de-2400-1a00-b020-b10-4d4a-4bc5-ed4e-366a.ngrok-free.app/api/Search?searchItem=" +
           searchTerm,
         method: "GET",
         contentType: "application/json",
