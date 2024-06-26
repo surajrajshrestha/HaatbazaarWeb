@@ -194,4 +194,12 @@ div#loader svg {
   font-weight: 600;
   transition: 0.3s ease;
   animation-delay: 3s;
+}
+
+span.error {
+  color: red;
+  font-size: 12px;
+  position: absolute;
+  bottom: -20px;
+  left: 0;
 }/*# sourceMappingURL=style.css.map */
