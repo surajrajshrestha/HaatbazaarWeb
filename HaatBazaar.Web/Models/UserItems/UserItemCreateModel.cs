@@ -6,8 +6,6 @@ namespace HaatBazaar.Web.Models.UserItems
     {
         public int ItemId { get; set; }
 
-        [Required(ErrorMessage = "Item Name is required.")]
-        [StringLength(100, ErrorMessage = "Item Name cannot be longer than 100 characters.")]
         public string? ItemName { get; set; }
 
         [Required(ErrorMessage = "Quantity is required.")]

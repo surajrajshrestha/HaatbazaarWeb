@@ -8,11 +8,13 @@
                         <h3 class="register-box-msg fw-bold">Login</h3>
                         <form id="login-form" action="" method="post">
                             @Html.AntiForgeryToken()
+                            @Html.ValidationSummary()
                             <div class="input-group mb-4">
                                 <div class="form-floating">
                                     <input asp-for="PhoneNumber" type="tel" class="form-control"
                                         placeholder="" required>
                                     <label asp-for="PhoneNumber">Phone Number</label>
+                                    <span asp-validation-for="PhoneNumber"></span>
                                 </div>
                                 <div class="input-group-text"> <span class="bi bi-phone"></span> </div>
                             </div>
@@ -21,6 +23,7 @@
                                     <input asp-for="Password" type="password" class="form-control"
                                         placeholder="" required>
                                     <label asp-for="Password">Password</label>
+                                    <span asp-validation-for="Password"></span>
                                 </div>
                                 <div class="input-group-text"> <span class="bi bi-lock-fill"></span> </div>
                             </div> <!--begin::Row-->
@@ -45,43 +48,4 @@
             </div>
         </div>
     </div>
-</div>
-<div class="container">
-    <a id="sendOtp" href="#">send otp</a>
-
-    <script>
-
-        jQuery(document).ready(function ($) {
-            function sendOtp() {
-                const token = 'f1aeb5625d7b0ce87d8d21b3e6dfc157c6dff65807c093bf6b978dd1f58db25e';
-                const mobileNumbers = '9841132384';
-                const otp = Math.floor(100000 + Math.random() * 900000); // Generate a 6-digit OTP
-                const message = `Your HaatBazaar OTP code is ${otp}`;
-
-
-                $.ajax({
-                    url: 'https://sms.aakashsms.com/sms/v3/send/',
-                    type: 'POST',
-                    data: {
-                        auth_token: token,
-                        to: mobileNumbers,
-                        text: message
-                    },
-                    success: function (response) {
-                        alert('OTP sent successfully!');
-                        console.log(response);
-                    },
-                    error: function (xhr, status, error) {
-                        alert('Failed to send OTP. Please try again.');
-                        console.log(xhr, status, error);
-                    }
-                });
-            }
-            $("#sendOtp").on("click", function (e) {
-                e.preventDefault();
-                sendOtp();
-            });
-        });
-    </script>
-
 </div>

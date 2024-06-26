@@ -33,8 +33,8 @@ namespace HaatBazaar.Web.Controllers
             var response = await PostAsync($"{Endpoint}/register", register);
             var responseString = await response.Content.ReadAsStringAsync();
             var responseModel = JsonConvert.DeserializeObject<UserCreatedResponseModel>(responseString)!;
-            
-            if(response.StatusCode == HttpStatusCode.Accepted)
+
+            if (response.StatusCode == HttpStatusCode.Accepted)
             {
                 if (responseModel.NewUserCreated && !string.IsNullOrWhiteSpace(responseModel.Otp))
                 {
@@ -42,7 +42,7 @@ namespace HaatBazaar.Web.Controllers
                     return View("VerifyOtp", otpModel);
                 }
             }
-            
+
             return RedirectToAction("Login");
         }
 
@@ -57,7 +57,7 @@ namespace HaatBazaar.Web.Controllers
 
             var response = await PostAsync($"{Endpoint}/login", login);
 
-            if(response.StatusCode == HttpStatusCode.Accepted)
+            if (response.StatusCode == HttpStatusCode.Accepted)
             {
                 var responseString = await response.Content.ReadAsStringAsync();
                 var responseModel = JsonConvert.DeserializeObject<UserCreatedResponseModel>(responseString)!;
@@ -76,7 +76,7 @@ namespace HaatBazaar.Web.Controllers
                     HttpOnly = true,
                     Expires = DateTime.UtcNow.AddMinutes(30)
                 });
-                return RedirectToAction("Index", "Dashboard");
+                return RedirectToAction("Index", "UserItemsUi");
             }
 
             return View(login);
