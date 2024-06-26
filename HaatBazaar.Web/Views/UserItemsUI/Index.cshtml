@@ -24,17 +24,17 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                    <tr>
-                        <td>@item.Item</td>
-                        <td>@item.Quantity</td>
-                        <td>@item.Unit</td>
-                        <td>@item.Price</td>
-                        <td>
+                        <tr>
+                            <td>@item.Item</td>
+                            <td>@item.Quantity</td>
+                            <td>@item.Unit</td>
+                            <td>@item.Price</td>
+                            <td>
                             @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
                             @Html.ActionLink("Details", "Index", "Connection", new { connectionId = item.Id }) |
                             @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-                        </td>
-                    </tr>
+                            </td>
+                        </tr>
                 }
             </tbody>
         </table>
