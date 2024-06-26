@@ -8,7 +8,7 @@ $("#searchInput").blur(function () {
     $('body').removeClass("focused");
 });
 
-var map = L.map("map").setView([27.7765405,85.3463452], 11);
+var map = L.map("map").setView([27.7765405, 85.3463452], 11);
 
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     maxZoom: 19,
@@ -26,9 +26,9 @@ function updateLocation(userLocations, radius) {
     });
 
     // Set the map view to the custom location
-    if(radius < 2){
+    if (radius < 2) {
         map.setView([lat, lon], 15);
-    }else{
+    } else {
         map.setView([lat, lon], 12);
     }
 
@@ -46,14 +46,14 @@ function updateLocation(userLocations, radius) {
         radius: radius * 1000
     }).addTo(map);
 
-    var totalQuantity = 0; 
-    var price= 0;
+    var totalQuantity = 0;
+    var price = 0;
     var avgPrice = 0;
     var lt = 0;
     var totalPrice = 0;
     var unit = "";
     $.each(userLocations, function (index, location) {
-       
+
         var distance = map.distance([lat, lon], [location.latitude, location.longitude]);
         if (distance <= radius * 1000) {
             var userMarker = L.marker([location.latitude, location.longitude])
@@ -66,16 +66,16 @@ function updateLocation(userLocations, radius) {
                     "<br>Price: Rs. " + location.price +
                     "<br><br><a href='/'>Connect</a>"
                 )
-                //.openPopup();
-                 lt++;
-                unit = location.unit
-                var lq = location.quantity;
-                totalQuantity += lq;
-                totalPrice += location.price;    
+            //.openPopup();
+            lt++;
+            unit = location.unit
+            var lq = location.quantity;
+            totalQuantity += lq;
+            totalPrice += location.price;
         }
     });
-    
-    avgPrice = totalPrice/lt;
+
+    avgPrice = totalPrice / lt;
     console.log(lt);
     $(".suggestion-box").html("Total Quantity: " + totalQuantity + unit + "<br>Avg Price: Rs." + avgPrice.toFixed(2));
 }
@@ -83,18 +83,18 @@ function updateLocation(userLocations, radius) {
 $(document).ready(function () {
     $("#searchForm").submit(function (event) {
         event.preventDefault(); // Prevent the default form submission
-        $("#loader").css( "display","flex");
+        $("#loader").css("display", "flex");
         var searchTerm = $("#searchInput").val();
         var selectedRadius = $("#radiusSelect").val(); // Get the selected radius
 
         if (searchTerm.trim() !== "") {
             $.ajax({
-                url: "https://blueprintapp.azurewebsites.net/api/Search?searchItem=" + searchTerm,
+                //url: "https://blueprintapp.azurewebsites.net/api/Search?searchItem=" + searchTerm,
+                url: "https://localhost:7048/api/Search?searchItem=" + searchTerm,
                 method: "GET",
                 contentType: "application/json",
                 success: function (data) {
                     $("#loader").hide();
-                    console.log(data);
                     if (data.length > 0) {
                         updateLocation(data, selectedRadius); // Pass the selected radius
                     } else {

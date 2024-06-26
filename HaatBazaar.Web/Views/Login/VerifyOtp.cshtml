@@ -1,0 +1,84 @@
+@model HaatBazaar.Web.Models.Users.VerifyOtpModel
+
+<div class="container">
+    <div class="row">
+        <div class="container-fluid mb-5 mt-5">
+            <div class="login-box">
+                <div class="card card-outline card-primary">
+                    <div class="card-body login-card-body">
+                        <h3 class="register-box-msg fw-bold">Login</h3>
+                        <form asp-action="VerifyOtp" method="post">
+                            @Html.AntiForgeryToken()
+                            <div class="input-group mb-1">
+                                <div class="form-floating">
+                                    <input pattern="[789][0-9]{9}" asp-for="PhoneNumber" type="tel" class="form-control"
+                                        placeholder="" required>
+                                    <label asp-for="PhoneNumber">Phone Number</label>
+                                </div>
+                                <div class="input-group-text"> <span class="bi bi-phone"></span> </div>
+                            </div>
+                            <div class="input-group mb-1">
+                                <div class="form-floating">
+                                    <input asp-for="Otp" type="text" class="form-control" placeholder="">
+                                    <label asp-for="Otp">Otp</label>
+                                </div>
+                                <div class="input-group-text"> <span class="bi bi-lock-fill"></span> </div>
+                            </div> <!--begin::Row-->
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="d-grid gap-2">
+                                        <button type="submit" class="btn btn-primary">
+                                            Verify Otp
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        
+                    </div> <!-- /.login-card-body -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <a id="sendOtp" href="#">send otp</a>
+
+
+    <script>
+
+        jQuery(document).ready(function ($) {
+            function sendOtp() {
+                const token = 'f1aeb5625d7b0ce87d8d21b3e6dfc157c6dff65807c093bf6b978dd1f58db25e';
+                const mobileNumbers = '9841132384';
+                const otp = Math.floor(100000 + Math.random() * 900000); // Generate a 6-digit OTP
+                const message = `Your HaatBazaar OTP code is ${otp}`;
+
+
+                $.ajax({
+                    url: 'https://sms.aakashsms.com/sms/v3/send/',
+                    type: 'POST',
+                    data: {
+                        auth_token: token,
+                        to: mobileNumbers,
+                        text: message
+                    },
+                    success: function (response) {
+                        alert('OTP sent successfully!');
+                        console.log(response);
+                    },
+                    error: function (xhr, status, error) {
+                        alert('Failed to send OTP. Please try again.');
+                        console.log(xhr, status, error);
+                    }
+                });
+            }
+            $("#sendOtp").on("click", function (e) {
+                e.preventDefault();
+                sendOtp();
+            });
+        });
+    </script>
+
+</div>
