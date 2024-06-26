@@ -11,31 +11,28 @@
                             @Html.AntiForgeryToken()
                             <div class="input-group mb-4">
                                 <div class="form-floating">
-                                    <input name="fname" required asp-for="FirstName" type="text" class="form-control"
-                                        placeholder="">
+                                    <input required asp-for="FirstName" type="text" class="form-control" placeholder="">
                                     <label asp-for="FirstName">First Name</label>
                                 </div>
                                 <div class="input-group-text"> <span class="bi bi-person"></span> </div>
                             </div>
                             <div class="input-group mb-4">
                                 <div class="form-floating">
-                                    <input name="lname" required asp-for="LastName" type="text" class="form-control"
-                                        placeholder="">
+                                    <input required asp-for="LastName" type="text" class="form-control" placeholder="">
                                     <label asp-for="LastName">LastName</label>
                                 </div>
                                 <div class="input-group-text"> <span class="bi bi-person"></span> </div>
                             </div>
                             <div class="input-group mb-4">
                                 <div class="form-floating">
-                                    <input name="phone" asp-for="PhoneNumber" type="tel" class="form-control"
-                                        placeholder="" required>
+                                    <input asp-for="PhoneNumber" type="tel" class="form-control" placeholder="" required>
                                     <label asp-for="PhoneNumber">Phone Number</label>
                                 </div>
                                 <div class="input-group-text"> <span class="bi bi-phone"></span> </div>
                             </div>
                             <div class="input-group mb-4">
                                 <div class="form-floating">
-                                    <input name="email" asp-for="Email" type="email" class="form-control"
+                                    <input asp-for="Email" type="email" class="form-control"
                                         placeholder="">
                                     <label asp-for="Email">Email</label>
                                 </div>
@@ -43,16 +40,15 @@
                             </div>
                             <div class="input-group mb-4">
                                 <div class="form-floating">
-
-                                    <input name="password" asp-for="Password" type="password" class="form-control"
+                                    <input asp-for="Password" type="password" class="form-control"
                                         placeholder="">
                                     <label asp-for="Password">Password</label>
                                 </div>
                                 <div class="input-group-text"> <span class="bi bi-lock-fill"></span> </div>
                             </div> <!--begin::Row-->
                             <div class="visually-hidden">
-                                <input asp-for="Latitude" type="hidden" id="latitude" name="latitude">
-                                <input asp-for="Longitude" type="hidden" id="longitude" name="longitude">
+                                <input asp-for="Latitude" type="hidden">
+                                <input asp-for="Longitude" type="hidden">
                             </div>
                             <div class="row">
                                 <div class="col-8 d-inline-flex align-items-center">
@@ -82,65 +78,20 @@
         </div>
     </div>
 </div>
-
 <script>
     $(document).ready(function () {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                var lat = position.coords.latitude;
+                var lon = position.coords.longitude;
+
+                $('#Latitude').val(lat);
+                $('#Longitude').val(lon);
+                console.log(lat, lon);
+            });
+        }
+
         // Set the values of the hidden input fields
-        $('#latitude').val(Cookies.get('latitude'));
-        $('#longitude').val(Cookies.get('longitude'));
-    });
-</script>
 
-<script>
-    $(document).ready(function () {
-
-        if (Cookies.get('latitude') < 0 || Cookies.get('longitude') < 0) {
-            alert("Please Allow location in order use the App.");
-        }
-        function requestLocation() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(showPosition, showError);
-            } else {
-                alert("Geolocation is not supported by this browser.");
-            }
-        }
-
-        function showPosition(position) {
-            var latitude = position.coords.latitude;
-            var longitude = position.coords.longitude;
-            $('#location-info').text("Latitude: " + latitude + ", Longitude: " + longitude);
-
-            // Save latitude and longitude in cookies
-            Cookies.set('latitude', latitude, { expires: 7 });
-            Cookies.set('longitude', longitude, { expires: 7 });
-
-            // Access and print the values from cookies in console
-            savedLatitude = Cookies.get('latitude');
-            savedLongitude = Cookies.get('longitude');
-            //console.log("Saved Latitude: " + savedLatitude);
-            //console.log("Saved Longitude: " + savedLongitude);
-        }
-
-        function showError(error) {
-            switch (error.code) {
-                case error.PERMISSION_DENIED:
-                    alert("User denied the request for Geolocation.");
-                    requestLocation();
-                    break;
-                case error.POSITION_UNAVAILABLE:
-                    alert("Location information is unavailable.");
-                    break;
-                case error.TIMEOUT:
-                    alert("The request to get user location timed out.");
-                    requestLocation();
-                    break;
-                case error.UNKNOWN_ERROR:
-                    alert("An unknown error occurred.");
-                    break;
-            }
-        }
-
-        // Initial location request
-        requestLocation();
     });
 </script>

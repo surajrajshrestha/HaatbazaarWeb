@@ -142,7 +142,7 @@ $(document).ready(function () {
     if (searchTerm.trim() !== "") {
       $.ajax({
         url:
-          "https://blueprintapp.azurewebsites.net/api/Search?searchItem=" +
+          "https://localhost:7048/api/Search?searchItem=" +
           searchTerm,
         method: "GET",
         contentType: "application/json",
