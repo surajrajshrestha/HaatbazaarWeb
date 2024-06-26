@@ -10,54 +10,56 @@
                 <span>Address: @(Model.Seller?.Address ?? "-")</span>
             </div>
             <div class="col-12">
-                @foreach (var item in Model.Seller.Items)  {
-                    <span>Name: @item.ItemName</span>
-                    <span>Quantity: @item.Quantity @item.Unit</span>
-                    <span>Rate: @item.Rate / @item.Unit</span>
-                    <span>Total: @item.Total </span>
+                @foreach (var item in Model.Seller.Items)
+                {
+                            <span>Name: @item.ItemName</span>
+                            <span>Quantity: @item.Quantity @item.Unit</span>
+                            <span>Rate: @item.Rate / @item.Unit</span>
+                            <span>Total: @item.Total </span>
                 }
             </div>
         </div>
         @if (Model.IsSeller && Model.ContractStatus.Equals("request"))
         {
-            <form method="post" asp-action="Approve">
-                <input type="hidden" name="connectionId" value="@Model.ConnectionId" />
-                <div class="row">
-                    <div class="col-12">
-                        <button type="submit">Approve</button>
-                    </div>
-                </div>
-            </form>
+                    <form method="post" asp-action="Approve">
+                        <input type="hidden" name="connectionId" value="@Model.ConnectionId" />
+                        <div class="row">
+                            <div class="col-12">
+                                <button type="submit">Approve</button>
+                            </div>
+                        </div>
+                    </form>
         }
     </div>
     @if (Model.Buyer.BuyerId != Model.Seller.SellerId)
     {
-        <div class="col-4"></div>
-        <div class="col-4">
-            <span>Buyer Detail</span>
-            <div class="row">
-                <div class="col-12">
-                    <span>Name: @Model.Buyer.Name</span>
-                    <span>Phone Number: @Model.Buyer.PhoneNumber</span>
-                    <span>Address: @(Model.Buyer.Address ?? "-")</span>
-                </div>
-            </div>
-            @if (!Model.IsSeller && string.IsNullOrEmpty(Model.ContractStatus))
-            {
-                <form method="post" asp-action="RequestToBuy">
-                    <input type="hidden" name="connectionId" value="@Model.ConnectionId" />
+                <div class="col-4"></div>
+                <div class="col-4">
+                    <span>Buyer Detail</span>
                     <div class="row">
                         <div class="col-12">
-                            <button type="submit">Buy</button>
+                            <span>Name: @Model.Buyer.Name</span>
+                            <span>Phone Number: @Model.Buyer.PhoneNumber</span>
+                            <span>Address: @(Model.Buyer.Address ?? "-")</span>
                         </div>
                     </div>
-                </form>
+            @if (!Model.IsSeller && string.IsNullOrEmpty(Model.ContractStatus))
+            {
+                                <form method="post" asp-action="RequestToBuy">
+                                    <input type="hidden" name="connectionId" value="@Model.ConnectionId" />
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <button type="submit">Buy</button>
+                                        </div>
+                                    </div>
+                                </form>
             }
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <button>Buy</button>
-            </div>
-        </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <button>Buy</button>
+                    </div>
+                </div>
+    }
     </div>
 </div>
