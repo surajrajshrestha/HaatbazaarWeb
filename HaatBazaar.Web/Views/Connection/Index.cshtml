@@ -10,8 +10,7 @@
                 <span>Address: @(Model.Seller?.Address ?? "-")</span>
             </div>
             <div class="col-12">
-                @foreach (var item in Model.Seller.Items)
-                {
+                @foreach (var item in Model.Seller.Items)  {
                     <span>Name: @item.ItemName</span>
                     <span>Quantity: @item.Quantity @item.Unit</span>
                     <span>Rate: @item.Rate / @item.Unit</span>
@@ -55,6 +54,10 @@
                 </form>
             }
         </div>
-    }
-
+        <div class="row">
+            <div class="col-12">
+                <button>Buy</button>
+            </div>
+        </div>
+    </div>
 </div>

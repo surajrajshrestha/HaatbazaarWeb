@@ -43,11 +43,6 @@
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', function () {
                 navigator.serviceWorker.register('/service-worker.js')
-                    .then(function (registration) {
-                        console.log('Service Worker registered with scope:', registration.scope);
-                    }, function (error) {
-                        console.log('Service Worker registration failed:', error);
-                    });
             });
         }
     </script>
@@ -62,11 +57,12 @@
                 <nav class="nav">
                     <ul>
                         <li><a href="#">About</a></li>
-                        <li><a href="#">Contact</a></li>
-                        <li><a href="@Url.Action("Index", "Blockchain")">Buy</a></li>
+                        <li><a asp-controller="useritemsui" asp-action="index">Products</a></li>
+                        <li><a href="/">Buy</a></li>
                         <li><a asp-controller="usersui" asp-action="index">User</a></li>
                         <li>
-                            <a asp-controller="login" asp-action="login" class="btn btn-outline-success">
+                            <a id="auth-button" asp-controller="login" asp-action="login"
+                                class="btn btn-outline-success">
                                 Login
                             </a>
                         </li>
@@ -82,19 +78,6 @@
     <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-    <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function () {
-                navigator.serviceWorker.register('/service-worker.js').then(function (registration) {
-                    // Registration was successful
-                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
-                }, function (err) {
-                    // registration failed :(
-                    console.log('ServiceWorker registration failed: ', err);
-                });
-            });
-        }
-    </script>
     @await RenderSectionAsync("Scripts", false)
 </body>
 

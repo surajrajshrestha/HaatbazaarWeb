@@ -18,7 +18,6 @@ if (navigator.geolocation) {
     function (position) {
       userLat = position.coords.latitude;
       userLon = position.coords.longitude;
-      console.log(userLat, userLon);
 
       // Initialize the map after getting the user's location
       if ($("#map").length > 0) {
@@ -101,7 +100,9 @@ function updateLocation(userLocations, radius) {
               location.unit +
               "<br>Price: Rs: " +
               location.price +
-              "<br><br><a href='/connection/index?connectionId=" + location.connectId + "'>Connect</a>"
+              "<br><br><a href='/connection/index?connectionId=" +
+              location.connectId +
+              "'>Connect</a>"
           );
         //.openPopup();
         lt++;
@@ -138,15 +139,16 @@ $(document).ready(function () {
     $("#loader").css("display", "flex");
     var searchTerm = $("#searchInput").val();
     var selectedRadius = $("#radiusSelect").val(); // Get the selected radius
-
+    var baseUrl =
+      "https://00ff-2400-1a00-b030-f848-ac79-6aa8-35fa-4f7.ngrok-free.app/api/Search?searchItem=" +
+      searchTerm;
     if (searchTerm.trim() !== "") {
       $.ajax({
-          url: "https://localhost:7048/api/Search?searchItem=" + searchTerm,
+        url: "https://localhost:7048/api/Search?searchItem=" + searchTerm,
         method: "GET",
         contentType: "application/json",
         success: function (data) {
           $("#loader").hide();
-          console.log(data);
           if (data.length > 0) {
             updateLocation(data, selectedRadius); // Pass the selected radius
           } else {
