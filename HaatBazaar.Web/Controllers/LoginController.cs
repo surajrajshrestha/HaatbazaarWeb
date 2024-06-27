@@ -2,7 +2,6 @@ using HaatBazaar.Web.Helpers;
 using HaatBazaar.Web.Models;
 using HaatBazaar.Web.Models.ResponseModels;
 using HaatBazaar.Web.Models.Users;
-using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Net;

@@ -1,0 +1,29 @@
+﻿@model IEnumerable<HaatBazaar.Web.Models.Blocks.Block>
+
+@if (Model != null)
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Previoush Hash</th>
+                <th>Data</th>
+                <th>Hash</th>
+                <th>TimeStamp</th>
+                <th>Nonce</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th>@item.PreviousHash</th>
+                    <th>@item.Data</th>
+                    <th>@item.Hash</th>
+                    <th>@item.TimeStamp</th>
+                    <th>@item.Nonce</th>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+}
