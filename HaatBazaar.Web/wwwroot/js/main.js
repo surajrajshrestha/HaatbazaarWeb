@@ -139,7 +139,7 @@ $(document).ready(function () {
     $("#loader").css("display", "flex");
     var searchTerm = $("#searchInput").val();
     var selectedRadius = $("#radiusSelect").val(); // Get the selected radius
-    var baseUrl ="https://localhost:7048/api/Search?searchItem=" + searchTerm;
+      var baseUrl ="https://haatbazaarapi.azurewebsites.net/api/Search?searchItem=" + searchTerm;
     if (searchTerm.trim() !== "") {
       $.ajax({
         url: baseUrl,

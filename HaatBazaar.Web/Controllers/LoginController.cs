@@ -100,7 +100,7 @@ namespace HaatBazaar.Web.Controllers
                     HttpOnly = true,
                     Expires = DateTime.UtcNow.AddMinutes(30)
                 });
-                return RedirectToAction("Index", "Dashboard");
+                return RedirectToAction("Index", "UserItemsUi");
             }
             return View(model);
         }
